@@ -5,7 +5,7 @@ Bambu AI Assistant adds a vision–enhanced chat helper to Bambu Studio. The ass
 ## Features
 
 - **Chat interface** with commands processed by `slicer_control.py`.
-- **Live screen capture** and analysis in `chat_gui.py` and `realtime_helper.py`.
+- **Live screen capture** (via `mss`) and analysis in `chat_gui.py` and `realtime_helper.py`.
 - Optional **advanced vision** tools in `advanced_vision.py`.
 - Prebuilt **installation script** for Windows (`install_bambu_ai.bat`).
 
@@ -28,10 +28,11 @@ page](https://github.com/tesseract-ocr/tesseract).
 
 ## Usage
 
-Launch the graphical assistant from the repository root:
+Launch the graphical assistant from the repository root. Use `--interval` to
+adjust the delay between screen captures (default is one second):
 
 ```bash
-python bambu_ai_assistant/chat_gui.py
+python bambu_ai_assistant/chat_gui.py --interval 1
 ```
 
 ## API Setup
@@ -49,7 +50,7 @@ Optionally specify a different model with `OPENAI_MODEL`. The default is
 Example run after setting the key:
 
 ```bash
-OPENAI_API_KEY=sk-... python bambu_ai_assistant/chat_gui.py
+OPENAI_API_KEY=sk-... python bambu_ai_assistant/chat_gui.py --interval 1
 ```
 
 ## Folder Structure
