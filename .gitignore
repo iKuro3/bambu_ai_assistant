@@ -1,0 +1,20 @@
+# Ignore Python cache and compiled files
+__pycache__/
+*.py[cod]
+
+# Distribution / packaging
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+.DS_Store
+
+# Virtual environments
+venv/
+ENV/
+
