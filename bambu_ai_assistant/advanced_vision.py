@@ -7,6 +7,7 @@ import numpy as np
 from PIL import Image
 import base64
 import json
+import time
 
 class AdvancedBambuVision:
     def __init__(self):
@@ -214,7 +215,7 @@ class AdvancedBambuVision:
     def generate_detailed_report(self, image):
         """Generate a comprehensive analysis report"""
         report = {
-            'timestamp': json.dumps(time.time()),
+            'timestamp': time.time(),
             'image_dimensions': image.shape[:2],
             'model_preview': self.detect_3d_model_preview(image),
             'print_bed': self.analyze_print_bed(image),
