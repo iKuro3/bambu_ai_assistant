@@ -19,6 +19,13 @@ pip install -r bambu_ai_assistant/requirements.txt
 
 On Windows you may also run `install_bambu_ai.bat` for an automated setup.
 
+### Tesseract OCR
+
+Tesseract is required for text recognition features. Install it separately and
+ensure the `tesseract` executable is available in your system `PATH`. Official
+installers and packages can be found on the [Tesseract GitHub
+page](https://github.com/tesseract-ocr/tesseract).
+
 ## Usage
 
 Launch the graphical assistant from the repository root:
