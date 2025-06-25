@@ -296,4 +296,5 @@ def generate_recommendations(report, user_query):
             recommendations.append("Check printer connection and power")
         else:
             recommendations.append("Ready to start print")
-    
+
+    return recommendations
