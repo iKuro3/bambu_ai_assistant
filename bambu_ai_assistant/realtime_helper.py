@@ -4,7 +4,6 @@
 import cv2
 import numpy as np
 import pytesseract
-from PIL import Image
 import pyautogui
 import time
 import json
