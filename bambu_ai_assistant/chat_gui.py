@@ -290,4 +290,3 @@ class BambuAIAssistant(ctk.CTk):
 
 if __name__ == "__main__":
     app = BambuAIAssistant()
-    app.mainloop()

@@ -13,4 +13,4 @@ requests>=2.0
 # For more advanced AI vision (optional)
 # ultralytics>=8.0.0  # For YOLO object detection
 # torch>=2.0.0        # For deep learning models
-# transformers>=4.30.0 # For vision-language models
+

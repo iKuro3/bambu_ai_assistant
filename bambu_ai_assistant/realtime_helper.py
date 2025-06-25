@@ -300,4 +300,3 @@ def generate_recommendations(report, user_query):
         else:
             recommendations.append("Ready to start print")
     
-    return recommendations

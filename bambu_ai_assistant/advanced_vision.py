@@ -369,28 +369,4 @@ def get_advanced_analysis(screenshot_array):
         logger.error(f"Error in get_advanced_analysis: {e}")
         return {'error': str(e)}
 
-def find_clickable_elements(screenshot_array, intent=""):
-    """Find elements that can be clicked based on user intent"""
-    try:
-        if screenshot_array is None:
-            return []
-            
-        vision = AdvancedBambuVision()
-        ui_elements = vision.detect_ui_elements(screenshot_array)
-        
-        clickable = []
-        intent_lower = intent.lower()
-        
-        for button in ui_elements.get('buttons', []):
-            if 'slice' in intent_lower and button['color'] == 'orange':
-                clickable.append(('Slice Button', button['center']))
-            elif 'print' in intent_lower and button['color'] == 'blue':
-                clickable.append(('Print Button', button['center']))
-            elif 'stop' in intent_lower and button['color'] == 'red':
-                clickable.append(('Stop Button', button['center']))
-        
-        return clickable
-        
-    except Exception as e:
-        logger.error(f"Error finding clickable elements: {e}")
-        return []
+
