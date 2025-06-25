@@ -1,6 +1,3 @@
-# REPLACE FILE: chat_gui.py
-# This replaces your existing chat_gui.py with enhanced screen vision capabilities
-
 import customtkinter as ctk
 import cv2
 import numpy as np

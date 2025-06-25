@@ -1,6 +1,4 @@
-# CREATE NEW FILE: requirements.txt
 # Install these dependencies with: pip install -r requirements.txt
-
 customtkinter>=5.2.0
 opencv-python>=4.8.0
 pyautogui>=0.9.54

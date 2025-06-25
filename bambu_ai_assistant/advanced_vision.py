@@ -1,7 +1,3 @@
-# CREATE NEW FILE: advanced_vision.py (OPTIONAL)
-# This adds more advanced AI vision capabilities
-# Only create this if you want extra features like object detection
-
 import cv2
 import numpy as np
 import json

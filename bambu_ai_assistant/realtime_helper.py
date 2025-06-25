@@ -1,6 +1,3 @@
-# REPLACE FILE: realtime_helper.py
-# This replaces your existing empty realtime_helper.py with AI vision capabilities
-
 import cv2
 import numpy as np
 import pytesseract
