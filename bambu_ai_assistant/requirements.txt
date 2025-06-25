@@ -1,78 +1,15 @@
-diff --git a/README.md b/README.md
-index 34ff7486e533ea8c6528d52f9664c2558c0c11a8..9853373790a825e574c35f627c7d2dbfcaec7a4a 100644
---- a/README.md
-+++ b/README.md
-@@ -1,68 +1,69 @@
- # Bambu AI Assistant
- 
- Bambu AI Assistant adds a vision–enhanced chat helper to Bambu Studio. The assistant can analyze the screen, extract printing information and run slicer commands on your 3D models.
- 
- ## Features
- 
- - **Chat interface** with commands processed by `slicer_control.py`.
--- **Live screen capture** and analysis in `chat_gui.py` and `realtime_helper.py`.
-+- **Live screen capture** (via `mss`) and analysis in `chat_gui.py` and `realtime_helper.py`.
- - Optional **advanced vision** tools in `advanced_vision.py`.
- - Prebuilt **installation script** for Windows (`install_bambu_ai.bat`).
- 
- ## Installation
- 
- Install Python dependencies with pip:
- 
- ```bash
- pip install -r bambu_ai_assistant/requirements.txt
- ```
- 
- On Windows you may also run `install_bambu_ai.bat` for an automated setup.
- 
- ### Tesseract OCR
- 
- Tesseract is required for text recognition features. Install it separately and
- ensure the `tesseract` executable is available in your system `PATH`. Official
- installers and packages can be found on the [Tesseract GitHub
- page](https://github.com/tesseract-ocr/tesseract).
- 
- ## Usage
- 
--Launch the graphical assistant from the repository root:
-+Launch the graphical assistant from the repository root. Use `--interval` to
-+adjust the capture delay (default is 1 second):
- 
- ```bash
--python bambu_ai_assistant/chat_gui.py
-+python bambu_ai_assistant/chat_gui.py --interval 1
- ```
- 
- ## API Setup
- 
- The chat interface streams responses from OpenAI's Chat Completion API. Set your
- API key in the `OPENAI_API_KEY` environment variable before launching:
- 
- ```bash
- export OPENAI_API_KEY=sk-...
- ```
- 
- Optionally specify a different model with `OPENAI_MODEL`. The default is
- `gpt-3.5-turbo`.
- 
- Example run after setting the key:
- 
- ```bash
--OPENAI_API_KEY=sk-... python bambu_ai_assistant/chat_gui.py
-+OPENAI_API_KEY=sk-... python bambu_ai_assistant/chat_gui.py --interval 1.5
- ```
- 
- ## Folder Structure
- 
- ```
- ├── README.md
- └── bambu_ai_assistant
-     ├── chat_gui.py          # main GUI application
-     ├── realtime_helper.py   # screen analysis helpers
-     ├── slicer_control.py    # slicer automation
-     ├── advanced_vision.py   # extra vision features (optional)
-     ├── requirements.txt     # Python dependencies
-     └── install_bambu_ai.bat # Windows installer
- ```
- 
- The `models` and `outputs` folders are created automatically when running the installer or when processing models.
+# Install these dependencies with: pip install -r requirements.txt
+
+customtkinter>=5.2.0
+opencv-python>=4.8.0
+pyautogui>=0.9.54
+pygetwindow>=0.0.9
+Pillow>=10.0.0
+pytesseract>=0.3.10
+numpy>=1.24.0
+mss>=9.0.1
+
+# For more advanced AI vision (optional)
+# ultralytics>=8.0.0  # For YOLO object detection
+# torch>=2.0.0        # For deep learning models
+# transformers>=4.30.0 # For vision-language models
