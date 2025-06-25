@@ -18,3 +18,4 @@ build/
 venv/
 ENV/
 
+bambu_ai_assistant/__pycache__/
