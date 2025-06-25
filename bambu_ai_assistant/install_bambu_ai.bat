@@ -1,4 +1,3 @@
-REM CREATE NEW FILE: install_bambu_ai.bat
 REM Double-click this file to automatically install everything
 
 @echo off
