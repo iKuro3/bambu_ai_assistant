@@ -19,12 +19,37 @@ pip install -r bambu_ai_assistant/requirements.txt
 
 On Windows you may also run `install_bambu_ai.bat` for an automated setup.
 
+### Tesseract OCR
+
+Tesseract is required for text recognition features. Install it separately and
+ensure the `tesseract` executable is available in your system `PATH`. Official
+installers and packages can be found on the [Tesseract GitHub
+page](https://github.com/tesseract-ocr/tesseract).
+
 ## Usage
 
 Launch the graphical assistant from the repository root:
 
 ```bash
 python bambu_ai_assistant/chat_gui.py
+```
+
+## API Setup
+
+The chat interface streams responses from OpenAI's Chat Completion API. Set your
+API key in the `OPENAI_API_KEY` environment variable before launching:
+
+```bash
+export OPENAI_API_KEY=sk-...
+```
+
+Optionally specify a different model with `OPENAI_MODEL`. The default is
+`gpt-3.5-turbo`.
+
+Example run after setting the key:
+
+```bash
+OPENAI_API_KEY=sk-... python bambu_ai_assistant/chat_gui.py
 ```
 
 ## Folder Structure

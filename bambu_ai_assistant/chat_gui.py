@@ -10,7 +10,7 @@ from PIL import Image, ImageTk
 import threading
 import time
 import pytesseract
-from slicer_control import handle_command
+from chat_api_client import ChatAPIClient
 
 # Configure pyautogui
 pyautogui.FAILSAFE = True
@@ -25,12 +25,13 @@ class BambuAIAssistant(ctk.CTk):
         super().__init__()
         self.title("Bambu AI Assistant - Live Vision")
         self.geometry("800x700")
-        
+
         # Initialize variables
         self.bambu_window = None
         self.screen_capture_active = False
         self.current_screenshot = None
         self.vision_analysis = ""
+        self.api_client = ChatAPIClient()
         
         self.setup_ui()
         self.find_bambu_studio()
@@ -270,39 +271,22 @@ class BambuAIAssistant(ctk.CTk):
             return f"Control error: {str(e)}"
     
     def process_input(self, event=None):
-        """Process user input"""
+        """Process user input and stream AI response."""
         user_input = self.entry.get().strip()
         if not user_input:
             return
-        
+
         self.chat_log.insert("end", f"You: {user_input}\n")
-        self.entry.delete(0, 'end')
-        
-        # Check if it's a vision-related question
-        vision_keywords = ["see", "screen", "what", "show", "display", "visible"]
-        control_keywords = ["slice", "print", "open", "center", "click"]
-        
-        if any(keyword in user_input.lower() for keyword in vision_keywords):
-            if self.current_screenshot is not None:
-                analysis = self.analyze_screen_content(self.current_screenshot)
-                response = "🔍 Current screen analysis:\n" + "\n".join(analysis)
-            else:
-                response = "No screen capture available. Enable 'Live Vision' first."
-        
-        elif any(keyword in user_input.lower() for keyword in control_keywords):
-            # Extract action
-            for keyword in control_keywords:
-                if keyword in user_input.lower():
-                    response = self.control_bambu_studio(keyword)
-                    break
-        
-        else:
-            # Use existing slicer control
-            response = handle_command(user_input)
-        
-        self.chat_log.insert("end", f"AI: {response}\n")
-        self.chat_log.see("end")
+        self.entry.delete(0, "end")
+
+        def stream_reply():
+            for chunk in self.api_client.send(user_input):
+                self.chat_log.insert("end", chunk)
+                self.chat_log.see("end")
+                self.update()
+            self.chat_log.insert("end", "\n")
+
+        threading.Thread(target=stream_reply, daemon=True).start()
 
 if __name__ == "__main__":
     app = BambuAIAssistant()
-    app.mainloop()
