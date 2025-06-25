@@ -46,13 +46,6 @@ if %ERRORLEVEL% EQU 0 (
 )
 
 echo.
-echo ========================================
-echo Files you need to update manually:
-echo ========================================
-echo 1. REPLACE: chat_gui.py (with enhanced version)
-echo 2. REPLACE: realtime_helper.py (with vision helper) 
-echo 3. KEEP: slicer_control.py (no changes needed)
-echo 4. CREATE: requirements.txt (optional, for future installs)
-echo.
+echo Installation finished. Press any key to exit.
 pause
 
