@@ -27,6 +27,24 @@ Launch the graphical assistant from the repository root:
 python bambu_ai_assistant/chat_gui.py
 ```
 
+## API Setup
+
+The chat interface streams responses from OpenAI's Chat Completion API. Set your
+API key in the `OPENAI_API_KEY` environment variable before launching:
+
+```bash
+export OPENAI_API_KEY=sk-...
+```
+
+Optionally specify a different model with `OPENAI_MODEL`. The default is
+`gpt-3.5-turbo`.
+
+Example run after setting the key:
+
+```bash
+OPENAI_API_KEY=sk-... python bambu_ai_assistant/chat_gui.py
+```
+
 ## Folder Structure
 
 ```
