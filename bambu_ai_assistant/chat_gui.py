@@ -7,6 +7,7 @@ import numpy as np
 import pyautogui
 import pygetwindow as gw
 from PIL import Image, ImageTk
+import mss
 import threading
 import time
 import pytesseract
@@ -20,8 +21,10 @@ pyautogui.PAUSE = 0.1
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 
+CAPTURE_INTERVAL = 2.0
+
 class BambuAIAssistant(ctk.CTk):
-    def __init__(self):
+    def __init__(self, capture_interval: float = CAPTURE_INTERVAL):
         super().__init__()
         self.title("Bambu AI Assistant - Live Vision")
         self.geometry("800x700")
@@ -31,6 +34,7 @@ class BambuAIAssistant(ctk.CTk):
         self.screen_capture_active = False
         self.current_screenshot = None
         self.vision_analysis = ""
+        self.capture_interval = capture_interval
         
         self.setup_ui()
         self.find_bambu_studio()
@@ -126,7 +130,7 @@ class BambuAIAssistant(ctk.CTk):
         while self.screen_capture_active:
             try:
                 self.capture_and_analyze()
-                time.sleep(2)  # Analyze every 2 seconds
+                time.sleep(self.capture_interval)
             except Exception as e:
                 print(f"Vision error: {e}")
                 time.sleep(1)
@@ -134,16 +138,21 @@ class BambuAIAssistant(ctk.CTk):
     def capture_screen(self):
         """Capture Bambu Studio window or full screen"""
         try:
-            if self.bambu_window and self.bambu_window.isActive:
-                # Capture specific window
-                bbox = (self.bambu_window.left, self.bambu_window.top, 
-                       self.bambu_window.right, self.bambu_window.bottom)
-                screenshot = pyautogui.screenshot(region=bbox)
-            else:
-                # Capture full screen
-                screenshot = pyautogui.screenshot()
-            
-            return np.array(screenshot)
+            with mss.mss() as sct:
+                if self.bambu_window and self.bambu_window.isActive:
+                    monitor = {
+                        "top": self.bambu_window.top,
+                        "left": self.bambu_window.left,
+                        "width": self.bambu_window.width,
+                        "height": self.bambu_window.height,
+                    }
+                else:
+                    monitor = sct.monitors[0]
+
+                sct_img = sct.grab(monitor)
+                img = np.array(sct_img)
+                img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGB)
+                return img
         except Exception as e:
             print(f"Screenshot error: {e}")
             return None
@@ -304,5 +313,16 @@ class BambuAIAssistant(ctk.CTk):
         self.chat_log.see("end")
 
 if __name__ == "__main__":
-    app = BambuAIAssistant()
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Bambu AI Assistant")
+    parser.add_argument(
+        "--interval",
+        type=float,
+        default=CAPTURE_INTERVAL,
+        help="Screen capture interval in seconds",
+    )
+    args = parser.parse_args()
+
+    app = BambuAIAssistant(capture_interval=args.interval)
     app.mainloop()
