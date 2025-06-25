@@ -1,4 +1,3 @@
-REM CREATE NEW FILE: install_bambu_ai.bat
 REM Double-click this file to automatically install everything
 
 @echo off
@@ -56,3 +55,4 @@ echo 3. KEEP: slicer_control.py (no changes needed)
 echo 4. CREATE: requirements.txt (optional, for future installs)
 echo.
 pause
+
